@@ -10,7 +10,7 @@ const PostForm = ({createPost}) => {
 
         const {title} = state;
         const newPost = {title, id: Date.now()}
-        createPost(newPost)
+        state.title.trim() && createPost(newPost)
         setState({title: ''})
     }
     const handleChange = (e) => {
