@@ -1,16 +1,23 @@
 import React, {useState} from "react";
 import {connect} from "react-redux";
-import {createPost} from "../redux/actions";
+import {createPost, addError, clearErrors} from "../redux/actions";
 
-const PostForm = ({createPost}) => {
+const PostForm = ({createPost, addError, error}) => {
     const [state, setState] = useState({title: ''});
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const {title} = state;
+
+        if(!title.trim()) {
+            addError('Пустое поле ввода');
+            return;
+        }
+
         const newPost = {title, id: Date.now()}
-        state.title.trim() && createPost(newPost)
+        createPost(newPost);
+
         setState({title: ''})
     }
     const handleChange = (e) => {
@@ -29,8 +36,13 @@ const PostForm = ({createPost}) => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        error: state.app.error,
+    }
+};
 const mapDispatchToProps = {
     createPost
 }
 
-export default connect(null, {createPost})(PostForm);
+export default connect(mapStateToProps, {createPost, addError, clearErrors})(PostForm);

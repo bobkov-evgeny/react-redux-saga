@@ -6,8 +6,9 @@ import {compose, createStore, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import {rootReducer} from "./redux/rootReducer";
 import thunk from "redux-thunk";
+import {forbiddenWordsMiddleware} from "./redux/middleware";
 
-const store = createStore(rootReducer, undefined, applyMiddleware(thunk))
+const store = createStore(rootReducer, undefined, applyMiddleware(thunk, forbiddenWordsMiddleware))
 
 render(
   <React.StrictMode>
