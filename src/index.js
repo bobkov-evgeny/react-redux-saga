@@ -7,12 +7,7 @@ import {Provider} from "react-redux";
 import {rootReducer} from "./redux/rootReducer";
 import thunk from "redux-thunk";
 
-const composedEnhancer = compose(
-    // EXAMPLE: Add whatever middleware you actually want to use here
-    applyMiddleware(thunk)
-)
-
-const store = createStore(rootReducer, undefined, composedEnhancer)
+const store = createStore(rootReducer, undefined, applyMiddleware(thunk))
 
 render(
   <React.StrictMode>

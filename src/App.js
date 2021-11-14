@@ -14,7 +14,6 @@ function App() {
       </div>
 
 
-
       <div className="row">
           <div className="col">
               <h2>Синхронные Посты</h2>
